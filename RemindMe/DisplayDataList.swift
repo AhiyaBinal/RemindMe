@@ -15,7 +15,7 @@ class DisplayDataList: UIViewController {
     }
 
     @IBAction func btnAddPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "pushToFormViewController", sender: self)
+        self.performSegue(withIdentifier: "moveToInputDataForm", sender: self)
     }
 }
 
