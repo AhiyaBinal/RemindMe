@@ -20,26 +20,14 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     let dtPicker = UIDatePicker()
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidShow(notification:)),
-           name: UIResponder.keyboardDidShowNotification, object: nil)
-           NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidHide(notification:)),
-           name: UIResponder.keyboardDidHideNotification, object: nil)
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
         self.showDatePicker()
     }
-    //MARK: Methods to manage keybaord
-    @objc func keyboardDidShow(notification: NSNotification) {
-        let info = notification.userInfo
-        let keyBoardSize = info![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-        scrlVMain.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyBoardSize.height, right: 0.0)
-        scrlVMain.scrollIndicatorInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyBoardSize.height, right: 0.0)
-    }
-
-    @objc func keyboardDidHide(notification: NSNotification) {
-        
-        scrlVMain.contentInset = UIEdgeInsets.zero
-        scrlVMain.scrollIndicatorInsets = UIEdgeInsets.zero
+   
+    @objc func keyboardWillHide(notification: NSNotification) {
+        scrlVMain.contentInset = .zero
+        scrlVMain.scrollIndicatorInsets = .zero
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            self.view.endEditing(true)

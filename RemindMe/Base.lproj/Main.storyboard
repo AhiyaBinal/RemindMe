@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w6k-un-IjY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -133,7 +133,7 @@
                                         </buttonConfiguration>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="BdQ-Fw-eI8" firstAttribute="trailing" secondItem="hlP-xy-2Kr" secondAttribute="trailing" constant="20" id="7NH-5h-wpw"/>
                                     <constraint firstAttribute="bottom" secondItem="Tlb-Gt-TA1" secondAttribute="bottom" constant="246" id="7jC-Ss-ZzB"/>
@@ -152,7 +152,6 @@
                                     <constraint firstItem="mez-oe-jcr" firstAttribute="width" secondItem="UPe-2I-4sB" secondAttribute="width" id="Vm6-YS-gy1"/>
                                     <constraint firstItem="UPe-2I-4sB" firstAttribute="height" secondItem="gqL-5K-vit" secondAttribute="height" id="W8M-gx-X4N"/>
                                     <constraint firstItem="h0w-i8-dZz" firstAttribute="width" secondItem="hlP-xy-2Kr" secondAttribute="width" id="XYG-Zg-hOS"/>
-                                    <constraint firstItem="hlP-xy-2Kr" firstAttribute="top" secondItem="BdQ-Fw-eI8" secondAttribute="top" constant="20" id="Z3n-Ha-nmA"/>
                                     <constraint firstItem="6UW-qL-nSg" firstAttribute="width" secondItem="mez-oe-jcr" secondAttribute="width" id="acj-yE-j3m"/>
                                     <constraint firstItem="oQQ-UZ-YrR" firstAttribute="leading" secondItem="6UW-qL-nSg" secondAttribute="leading" id="anf-Qz-USa"/>
                                     <constraint firstItem="h0w-i8-dZz" firstAttribute="leading" secondItem="hlP-xy-2Kr" secondAttribute="leading" id="as1-tj-3ZZ"/>
@@ -167,6 +166,7 @@
                                     <constraint firstItem="UPe-2I-4sB" firstAttribute="width" secondItem="gqL-5K-vit" secondAttribute="width" id="jzw-Fg-FN0"/>
                                     <constraint firstItem="6UW-qL-nSg" firstAttribute="top" secondItem="mez-oe-jcr" secondAttribute="bottom" constant="34" id="n0F-9E-HKE"/>
                                     <constraint firstItem="UPe-2I-4sB" firstAttribute="leading" secondItem="gqL-5K-vit" secondAttribute="leading" id="nHa-yh-Afo"/>
+                                    <constraint firstItem="hlP-xy-2Kr" firstAttribute="top" secondItem="vK1-8h-Zxc" secondAttribute="top" constant="20" id="p4z-cG-CzG"/>
                                     <constraint firstItem="Tlb-Gt-TA1" firstAttribute="top" secondItem="oQQ-UZ-YrR" secondAttribute="bottom" constant="44" id="p9e-KZ-iVT"/>
                                     <constraint firstItem="gqL-5K-vit" firstAttribute="trailing" secondItem="h0w-i8-dZz" secondAttribute="trailing" id="smY-Y2-zKz"/>
                                     <constraint firstItem="mez-oe-jcr" firstAttribute="top" secondItem="UPe-2I-4sB" secondAttribute="bottom" constant="34" id="uhz-gG-3Sd"/>
@@ -211,9 +211,6 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
