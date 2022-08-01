@@ -14,6 +14,9 @@
 		B141BBE62889DF2E00EAB475 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B141BBE52889DF2E00EAB475 /* Assets.xcassets */; };
 		B141BBE92889DF2E00EAB475 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B141BBE72889DF2E00EAB475 /* LaunchScreen.storyboard */; };
 		B141BBF12889F65600EAB475 /* InputDataForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B141BBF02889F65600EAB475 /* InputDataForm.swift */; };
+		B188C2472894890100CEFDC3 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B188C2462894890100CEFDC3 /* CommonFunctions.swift */; };
+		B188C24928948FD100CEFDC3 /* DBFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B188C24828948FD100CEFDC3 /* DBFunctions.swift */; };
+		B190D90828975AD6000CAE9B /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B190D90728975AD6000CAE9B /* Friend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		B141BBE82889DF2E00EAB475 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B141BBEA2889DF2E00EAB475 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B141BBF02889F65600EAB475 /* InputDataForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataForm.swift; sourceTree = "<group>"; };
+		B188C2462894890100CEFDC3 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		B188C24828948FD100CEFDC3 /* DBFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFunctions.swift; sourceTree = "<group>"; };
+		B190D90728975AD6000CAE9B /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 				B141BBDE2889DF2C00EAB475 /* SceneDelegate.swift */,
 				B141BBE02889DF2C00EAB475 /* DisplayDataList.swift */,
 				B141BBF02889F65600EAB475 /* InputDataForm.swift */,
+				B188C2462894890100CEFDC3 /* CommonFunctions.swift */,
+				B188C24828948FD100CEFDC3 /* DBFunctions.swift */,
+				B190D90728975AD6000CAE9B /* Friend.swift */,
 				B141BBE22889DF2C00EAB475 /* Main.storyboard */,
 				B141BBE52889DF2E00EAB475 /* Assets.xcassets */,
 				B141BBE72889DF2E00EAB475 /* LaunchScreen.storyboard */,
@@ -142,7 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B141BBF12889F65600EAB475 /* InputDataForm.swift in Sources */,
+				B190D90828975AD6000CAE9B /* Friend.swift in Sources */,
 				B141BBE12889DF2C00EAB475 /* DisplayDataList.swift in Sources */,
+				B188C2472894890100CEFDC3 /* CommonFunctions.swift in Sources */,
+				B188C24928948FD100CEFDC3 /* DBFunctions.swift in Sources */,
 				B141BBDD2889DF2C00EAB475 /* AppDelegate.swift in Sources */,
 				B141BBDF2889DF2C00EAB475 /* SceneDelegate.swift in Sources */,
 			);

@@ -23,6 +23,10 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var txtFName: UITextField!
     @IBOutlet weak var scrlVMain: UIScrollView!
     let dtPicker = UIDatePicker()
+    var objCommonFunction: CommonFunctions = CommonFunctions()
+    var objDBFunctions: DBFunctions = DBFunctions()
+    var objFriend: [Friend] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidShow(notification:)),
@@ -71,16 +75,7 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
            txtFDOB.text = formatter.string(from: dtPicker.date)
            self.view.endEditing(true)
     }
-    func isValidEmail(email: String) -> Bool {
-        let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailPattern)
-        return emailPred.evaluate(with: email)
-    }
-    func isValidPhone(phone: String) -> Bool {
-        let phonePattern = #"^\(?\d{3}\)?[ -]?\d{3}[ -]?\d{4}$"#
-        let phonePred = NSPredicate(format: "SELF MATCHES %@", phonePattern)
-        return phonePred.evaluate(with: phone)
-    }
+   
     @IBAction func btnSubmitPressed(_ sender: Any) {
         lblNameRequired.isHidden = true
         lblPhoneRequired.isHidden = true
@@ -92,23 +87,25 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
             //DB call
             let emailString = txtFEmail.text!
             let phoneString = txtFPhone.text!
-            if !self.isValidEmail(email: emailString){
-                lblEmailRequired.isHidden = false
-                lblEmailRequired.text = "Please Enter Valid Email-id"
-            }
-            if !self.isValidPhone(phone: phoneString){
-                lblPhoneRequired.isHidden = false
-                lblPhoneRequired.text = "Please Enter Valid Phone Number"
-            }
-            else{
+            if objCommonFunction.isValidEmail(email: emailString) && objCommonFunction.isValidPhone(phone: phoneString) {
                 //DB Call
-                lblEmailRequired.isHidden = false
-                lblPhoneRequired.isHidden = false
+                lblEmailRequired.isHidden = true
+                lblPhoneRequired.isHidden = true
                 lblEmailRequired.text = "*Email-id is required"
                 lblPhoneRequired.text = "*Phone is required"
                 print("All Good....")
+                objDBFunctions.insert(name: txtFName.text!, surname: txtFLastName.text!, relation: txtFRelation.text!, DOB: txtFDOB.text!, DOA: txtFDOAnniversary.text!, phone: txtFPhone.text!, email: txtFEmail.text!)
+                objFriend = objDBFunctions.read()
+                print("Yes Finally\(objFriend[0].name)")
             }
-           
+            if !objCommonFunction.isValidEmail(email: emailString){
+                lblEmailRequired.isHidden = false
+                lblEmailRequired.text = "Please Enter Valid Email-id"
+            }
+            if !objCommonFunction.isValidPhone(phone: phoneString){
+                lblPhoneRequired.isHidden = false
+                lblPhoneRequired.text = "Please Enter Valid Phone Number"
+            }
         }
         if txtFName.text == ""{
             lblNameRequired.isHidden = false
@@ -125,6 +122,5 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
         if txtFRelation.text == ""{
             lblRelationRequired.isHidden = false
         }
-        
     }
 }
