@@ -7,19 +7,23 @@
 
 import UIKit
 
-class DisplayDataList: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class DisplayDataList: UIViewController,UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tblFriendList: UITableView!
     var objDBFunctions: DBFunctions = DBFunctions()
     var objFriend: [Friend] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        objFriend = objDBFunctions.read()
-        tblFriendList.reloadData()
+        
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        objFriend = objDBFunctions.read()
+        tblFriendList.reloadData()    }
 
     @IBAction func btnAddPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "moveToInputDataForm", sender: self)
+        guard let objInputDataForm = self.storyboard?.instantiateViewController(withIdentifier: "InputDataForm") as? InputDataForm else { return }
+        self.navigationController?.pushViewController(objInputDataForm, animated: true)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objFriend.count
@@ -32,10 +36,9 @@ class DisplayDataList: UIViewController,UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InputDataForm") as! InputDataForm
-        nextViewController.objFriend = objFriend
-        self.present(nextViewController, animated:true, completion:nil)
+        guard let objInputDataForm = self.storyboard?.instantiateViewController(withIdentifier: "InputDataForm") as? InputDataForm else { return }
+        objInputDataForm.objFriend = objFriend
+        self.navigationController?.pushViewController(objInputDataForm, animated: true)
     }
 }
 

@@ -120,4 +120,21 @@ class DBFunctions: NSObject {
         }
         sqlite3_finalize(strStmtDelete)
     }
+    func update(query : String) {
+        //        let strQueryInsert = "INSERT INTO friend (Name, Surname ,Relation ,DOB ,DOA ,Phone ,Email) VALUES (?, ?, ? ,? ,? ,? ,?);"
+
+        var updateStatement: OpaquePointer?
+        if sqlite3_prepare_v2(ptrDatabase, query, -1, &updateStatement, nil) ==
+          SQLITE_OK {
+            if sqlite3_step(updateStatement) == SQLITE_DONE {
+                print("\nSuccessfully updated row.")
+            } else {
+                print("\nCould not update row.")
+                
+            }
+        } else {
+            print("\nUPDATE statement is not prepared")
+        }
+        sqlite3_finalize(updateStatement)
+    }
 }

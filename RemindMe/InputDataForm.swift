@@ -29,6 +29,7 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     var strTry: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Details"
         if (objFriend.count > 0) {
             txtFName.text = objFriend[0].name
             txtFLastName.text = objFriend[0].surname
@@ -54,7 +55,6 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
         scrlVMain.scrollIndicatorInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyBoardSize.height, right: 0.0)
     }
     @objc func keyboardDidHide(notification: NSNotification) {
-        
         scrlVMain.contentInset = UIEdgeInsets.zero
         scrlVMain.scrollIndicatorInsets = UIEdgeInsets.zero
     }
@@ -76,7 +76,9 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
         let btnSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([btnSpace,btnDone], animated: false)
         txtFDOB.inputAccessoryView = toolbar
+        txtFDOAnniversary.inputAccessoryView = toolbar
         txtFDOB.inputView = dtPicker
+        txtFDOAnniversary.inputView = dtPicker
        }
     @objc func donePressed(){
         let formatter = DateFormatter()
@@ -84,7 +86,6 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
            txtFDOB.text = formatter.string(from: dtPicker.date)
            self.view.endEditing(true)
     }
-   
     @IBAction func btnSubmitPressed(_ sender: Any) {
         lblNameRequired.isHidden = true
         lblPhoneRequired.isHidden = true
@@ -100,12 +101,15 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
                 //DB Call
                 lblEmailRequired.isHidden = true
                 lblPhoneRequired.isHidden = true
-                lblEmailRequired.text = "*Email-id is required"
-                lblPhoneRequired.text = "*Phone is required"
                 print("All Good....")
+                if (objFriend.count > 0) {
+                    let strQuery = "UPDATE friend SET Name = '\(txtFName.text!)',Surname = '\(txtFLastName.text!)',Relation = '\(txtFRelation.text!)',DOB = '\(txtFDOB.text!)',DOA = '\(txtFDOAnniversary.text!)',Phone = '\(txtFPhone.text!)' WHERE Email = '\(txtFEmail.text!)';"
+                    objDBFunctions.update(query: strQuery)
+                }
+                else {
                 objDBFunctions.insert(name: txtFName.text!, surname: txtFLastName.text!, relation: txtFRelation.text!, DOB: txtFDOB.text!, DOA: txtFDOAnniversary.text!, phone: txtFPhone.text!, email: txtFEmail.text!)
                 objFriend = objDBFunctions.read()
-                print("Yes Finally\(objFriend[0].name)")
+                    print("Yes Finally\(objFriend[0].name)")}
             }
             if !objCommonFunction.isValidEmail(email: emailString){
                 lblEmailRequired.isHidden = false
@@ -118,18 +122,23 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
         }
         if txtFName.text == ""{
             lblNameRequired.isHidden = false
+            lblNameRequired.text = "*Phone is required"
         }
         if txtFEmail.text == ""{
             lblEmailRequired.isHidden = false
+            lblEmailRequired.text = "*Email-id is required"
         }
         if txtFDOB.text == ""{
             lblDOBRequired.isHidden = false
+            lblDOBRequired.text = "*Phone is required"
         }
         if txtFPhone.text == ""{
             lblPhoneRequired.isHidden = false
+            lblPhoneRequired.text = "*Phone is required"
         }
         if txtFRelation.text == ""{
             lblRelationRequired.isHidden = false
+            lblRelationRequired.text = "*Relation is required"
         }
     }
 }
