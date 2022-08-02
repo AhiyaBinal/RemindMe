@@ -26,9 +26,18 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     var objCommonFunction: CommonFunctions = CommonFunctions()
     var objDBFunctions: DBFunctions = DBFunctions()
     var objFriend: [Friend] = []
-    
+    var strTry: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (objFriend.count > 0) {
+            txtFName.text = objFriend[0].name
+            txtFLastName.text = objFriend[0].surname
+            txtFRelation.text = objFriend[0].relation
+            txtFDOB.text = objFriend[0].DOB
+            txtFDOAnniversary.text = objFriend[0].DOA
+            txtFEmail.text = objFriend[0].email
+            txtFPhone.text = objFriend[0].phone
+        }
         NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidShow(notification:)),
             name: UIResponder.keyboardDidShowNotification, object: nil)
             NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidHide(notification:)),

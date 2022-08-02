@@ -29,9 +29,13 @@ class DisplayDataList: UIViewController,UITableViewDelegate,UITableViewDataSourc
         objcell.lblFriendName.text = objFriend[indexPath.row].name
         return objcell
     }
-    func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition)
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InputDataForm") as! InputDataForm
+        nextViewController.objFriend = objFriend
+        self.present(nextViewController, animated:true, completion:nil)
     }
 }
 
