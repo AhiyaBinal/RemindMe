@@ -27,6 +27,7 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     var objDBFunctions: DBFunctions = DBFunctions()
     var objFriend: [Friend] = []
     var strTry: String = ""
+    var flagDOB: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Details"
@@ -47,6 +48,17 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
         self.view.addGestureRecognizer(tap)
         self.showDatePicker()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFName, lblField: lblNameRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFPhone, lblField: lblPhoneRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFDOB, lblField: lblDOBRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFEmail, lblField: lblEmailRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFRelation, lblField: lblNameRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFLastName, lblField: lblNameRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFDOAnniversary, lblField: lblNameRequired)
+
+    }
     //MARK: Methods to manage keybaord
     @objc func keyboardDidShow(notification: NSNotification) {
         let info = notification.userInfo
@@ -63,6 +75,16 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
            self.view.endEditing(true)
            return false
        }
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        flagDOB = false
+        if textField == txtFDOB {
+            flagDOB = true
+        }
+        if textField == txtFEmail {
+            self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "*Email-id can not be changed after added", txtField: txtFEmail, lblField: lblEmailRequired)
+        }
+    }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         self.view.endEditing(true)
     }
@@ -83,16 +105,21 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     @objc func donePressed(){
         let formatter = DateFormatter()
            formatter.dateFormat = "dd/MM/yyyy"
-           txtFDOB.text = formatter.string(from: dtPicker.date)
+        if flagDOB {
+            txtFDOB.text = formatter.string(from: dtPicker.date)
+        }
+        else{
+            txtFDOAnniversary.text = formatter.string(from: dtPicker.date)
+        }
            self.view.endEditing(true)
     }
     @IBAction func btnSubmitPressed(_ sender: Any) {
-        lblNameRequired.isHidden = true
-        lblPhoneRequired.isHidden = true
-        lblDOBRequired.isHidden = true
-        lblEmailRequired.isHidden = true
-        lblRelationRequired.isHidden = true
-        
+
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFName, lblField: lblNameRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFPhone, lblField: lblPhoneRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFDOB, lblField: lblDOBRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFEmail, lblField: lblEmailRequired)
+        self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFRelation, lblField: lblNameRequired)
         if txtFName.text != "" && txtFEmail.text != "" && txtFDOB.text != "" && txtFPhone.text != "" && txtFRelation.text != ""{
             //DB call
             let emailString = txtFEmail.text!
@@ -101,44 +128,42 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
                 //DB Call
                 lblEmailRequired.isHidden = true
                 lblPhoneRequired.isHidden = true
-                print("All Good....")
                 if (objFriend.count > 0) {
                     let strQuery = "UPDATE friend SET Name = '\(txtFName.text!)',Surname = '\(txtFLastName.text!)',Relation = '\(txtFRelation.text!)',DOB = '\(txtFDOB.text!)',DOA = '\(txtFDOAnniversary.text!)',Phone = '\(txtFPhone.text!)' WHERE Email = '\(txtFEmail.text!)';"
                     objDBFunctions.update(query: strQuery)
                 }
                 else {
                 objDBFunctions.insert(name: txtFName.text!, surname: txtFLastName.text!, relation: txtFRelation.text!, DOB: txtFDOB.text!, DOA: txtFDOAnniversary.text!, phone: txtFPhone.text!, email: txtFEmail.text!)
-                objFriend = objDBFunctions.read()
-                    print("Yes Finally\(objFriend[0].name)")}
+                }
+                self.navigationController?.popViewController(animated: true)
             }
             if !objCommonFunction.isValidEmail(email: emailString){
-                lblEmailRequired.isHidden = false
-                lblEmailRequired.text = "Please Enter Valid Email-id"
+                self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Please Enter Valid Email-id", txtField: txtFName, lblField: lblNameRequired)
             }
             if !objCommonFunction.isValidPhone(phone: phoneString){
-                lblPhoneRequired.isHidden = false
-                lblPhoneRequired.text = "Please Enter Valid Phone Number"
+                self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Please Enter Valid Phone No.", txtField: txtFPhone, lblField: lblPhoneRequired)
             }
         }
         if txtFName.text == ""{
-            lblNameRequired.isHidden = false
-            lblNameRequired.text = "*Phone is required"
+            self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Name is required", txtField: txtFName, lblField: lblNameRequired)
         }
         if txtFEmail.text == ""{
-            lblEmailRequired.isHidden = false
-            lblEmailRequired.text = "*Email-id is required"
+            self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Email-id is required", txtField: txtFEmail, lblField: lblEmailRequired)
         }
         if txtFDOB.text == ""{
-            lblDOBRequired.isHidden = false
-            lblDOBRequired.text = "*Phone is required"
+            self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Date of Birth is required", txtField: txtFDOB, lblField: lblDOBRequired)
         }
         if txtFPhone.text == ""{
-            lblPhoneRequired.isHidden = false
-            lblPhoneRequired.text = "*Phone is required"
+            self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Phone is required", txtField: txtFPhone, lblField: lblPhoneRequired)
         }
         if txtFRelation.text == ""{
-            lblRelationRequired.isHidden = false
-            lblRelationRequired.text = "*Relation is required"
+            self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Relation is required", txtField: txtFRelation, lblField: lblRelationRequired)
         }
+    }
+    func setLabelTextFieldUI(flagStatus: Bool, borderWidth: CGFloat, borderColor: CGColor, strAlertMsg:String, txtField: UITextField,lblField: UILabel) {
+            lblField.isHidden = flagStatus
+            txtField.layer.borderWidth = borderWidth
+            txtField.layer.borderColor = borderColor
+            lblField.text = strAlertMsg
     }
 }

@@ -41,6 +41,7 @@
                                                 <constraint firstItem="X6B-I0-4Dc" firstAttribute="top" secondItem="2WN-ee-p9e" secondAttribute="top" constant="10" id="vdH-vx-H73"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="lblFriendName" destination="X6B-I0-4Dc" id="TC0-XN-Y2X"/>
                                         </connections>
@@ -118,9 +119,9 @@
                                             <outlet property="delegate" destination="w6k-un-IjY" id="VSo-QX-TUo"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Relation" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqL-5K-vit">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Relation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqL-5K-vit">
                                         <rect key="frame" x="20" y="152" width="374" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="w6k-un-IjY" id="tRu-TQ-g2l"/>
@@ -138,6 +139,9 @@
                                         <rect key="frame" x="20" y="282" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="w6k-un-IjY" id="hnD-JC-QnR"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date Of Anniversary" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-qL-nSg">
                                         <rect key="frame" x="20" y="350" width="374" height="34"/>
@@ -157,7 +161,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlb-Gt-TA1">
                                         <rect key="frame" x="159" y="496" width="79" height="36"/>
-                                        <color key="backgroundColor" red="0.10604199022054672" green="0.08845026046037674" blue="0.51728683710098267" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Submit">
