@@ -50,14 +50,15 @@ class DBFunctions: NSObject {
         }
         sqlite3_finalize(strStmtCreateTable)
     }
-    func insert(name:String, surname:String, relation:String ,DOB:String ,DOA:String ,phone: String ,email:String)
+    func insert(name:String, surname:String, relation:String ,DOB:String ,DOA:String ,phone: String ,email:String)-> Bool
     {
+        var flagStatus: Bool = false
         let friend = read()
         for strVal in friend
         {
             if strVal.email == email
             {
-                return
+                flagStatus = false
             }
         }
         let strQueryInsert = "INSERT INTO friend (Name, Surname ,Relation ,DOB ,DOA ,Phone ,Email) VALUES (?, ?, ? ,? ,? ,? ,?);"
@@ -72,14 +73,18 @@ class DBFunctions: NSObject {
             sqlite3_bind_text(strStmtInsert, 7, (email as NSString).utf8String, -1,nil)
 
             if sqlite3_step(strStmtInsert) == SQLITE_DONE {
-                print("Successfully inserted row.")
+               // print("Successfully inserted row.")
+                flagStatus = true
             } else {
-                print("Could not insert row.")
+                //print("Could not insert row.")
+                flagStatus = false
             }
         } else {
-            print("INSERT not be prepared.")
+           // print("INSERT not be prepared.")
+            flagStatus = false
         }
         sqlite3_finalize(strStmtInsert)
+        return flagStatus
     }
     func read() -> [Friend] {
         let strQueryRead = "SELECT * FROM friend;"
@@ -96,7 +101,6 @@ class DBFunctions: NSObject {
                 let strEmail = String(describing: String(cString: sqlite3_column_text(strStmtRead, 6)))
 
                 objFriend.append(Friend(name: strName, surname: strSurname, relation: strRelation, DOB: strDOB, DOA: strDOA, phone: strPhone, email: strEmail))
-                print("Email: \(strEmail)")
             }
         } else {
             print("SELECT not prepared")
@@ -104,37 +108,44 @@ class DBFunctions: NSObject {
         sqlite3_finalize(strStmtRead)
         return objFriend
     }
-    func deleteByEmailID(email:String) {
+    func deleteByEmailID(email:String) -> Bool {
+        var flagStatus: Bool = false
         let strQueryDelete = "DELETE FROM friend WHERE Email = ?;"
         var strStmtDelete: OpaquePointer? = nil
         if sqlite3_prepare_v2(ptrDatabase, strQueryDelete, -1, &strStmtDelete, nil) == SQLITE_OK {
             sqlite3_bind_text(strStmtDelete
                               , 1, (email as NSString).utf8String, -1,nil)
             if sqlite3_step(strStmtDelete) == SQLITE_DONE {
-                print("Successfully deleted row.")
+                //print("Successfully deleted row.")
+                flagStatus = true
             } else {
-                print("Could not delete row.")
+                //print("Could not delete row.")
+                flagStatus = false
             }
         } else {
-            print("DELETE not prepared")
+            //print("DELETE not prepared")
+            flagStatus = false
         }
         sqlite3_finalize(strStmtDelete)
+        return flagStatus
     }
-    func update(query : String) {
-        //        let strQueryInsert = "INSERT INTO friend (Name, Surname ,Relation ,DOB ,DOA ,Phone ,Email) VALUES (?, ?, ? ,? ,? ,? ,?);"
-
+    func update(query : String) -> Bool {
+        var flagStatus: Bool = false
         var updateStatement: OpaquePointer?
         if sqlite3_prepare_v2(ptrDatabase, query, -1, &updateStatement, nil) ==
           SQLITE_OK {
             if sqlite3_step(updateStatement) == SQLITE_DONE {
-                print("\nSuccessfully updated row.")
+               // print("\nSuccessfully updated row.")
+                flagStatus = true
             } else {
-                print("\nCould not update row.")
-                
+                //print("\nCould not update row.")
+                flagStatus = false
             }
         } else {
-            print("\nUPDATE statement is not prepared")
+            //print("\nUPDATE statement is not prepared")
+            flagStatus = false
         }
         sqlite3_finalize(updateStatement)
+        return flagStatus
     }
 }

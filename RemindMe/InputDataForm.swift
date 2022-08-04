@@ -39,6 +39,7 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
             txtFDOAnniversary.text = objFriend[0].DOA
             txtFEmail.text = objFriend[0].email
             txtFPhone.text = objFriend[0].phone
+            txtFEmail.isUserInteractionEnabled = false
         }
         NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidShow(notification:)),
             name: UIResponder.keyboardDidShowNotification, object: nil)
@@ -114,6 +115,8 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
            self.view.endEditing(true)
     }
     @IBAction func btnSubmitPressed(_ sender: Any) {
+        var flagStatus: Bool
+        var strMessage: String
 
         self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFName, lblField: lblNameRequired)
         self.setLabelTextFieldUI(flagStatus: true, borderWidth: 1.0, borderColor: UIColor.systemGray.cgColor, strAlertMsg: "", txtField: txtFPhone, lblField: lblPhoneRequired)
@@ -130,12 +133,19 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
                 lblPhoneRequired.isHidden = true
                 if (objFriend.count > 0) {
                     let strQuery = "UPDATE friend SET Name = '\(txtFName.text!)',Surname = '\(txtFLastName.text!)',Relation = '\(txtFRelation.text!)',DOB = '\(txtFDOB.text!)',DOA = '\(txtFDOAnniversary.text!)',Phone = '\(txtFPhone.text!)' WHERE Email = '\(txtFEmail.text!)';"
-                    objDBFunctions.update(query: strQuery)
+                    flagStatus = objDBFunctions.update(query: strQuery)
+                    strMessage = "Updating Data"
                 }
                 else {
-                objDBFunctions.insert(name: txtFName.text!, surname: txtFLastName.text!, relation: txtFRelation.text!, DOB: txtFDOB.text!, DOA: txtFDOAnniversary.text!, phone: txtFPhone.text!, email: txtFEmail.text!)
+                   flagStatus = objDBFunctions.insert(name: txtFName.text!, surname: txtFLastName.text!, relation: txtFRelation.text!, DOB: txtFDOB.text!, DOA: txtFDOAnniversary.text!, phone: txtFPhone.text!, email: txtFEmail.text!)
+                    strMessage = "Inserting Data"
                 }
-                self.navigationController?.popViewController(animated: true)
+                if flagStatus{
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else{
+                    self.displayAlert(strMessage: strMessage)
+                }
             }
             if !objCommonFunction.isValidEmail(email: emailString){
                 self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Please Enter Valid Email-id", txtField: txtFName, lblField: lblNameRequired)
@@ -165,5 +175,11 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
             txtField.layer.borderWidth = borderWidth
             txtField.layer.borderColor = borderColor
             lblField.text = strAlertMsg
+    }
+    func displayAlert(strMessage: String) {
+        let alertController = UIAlertController(title: "Error...", message: "Problem in \(strMessage)", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
     }
 }
