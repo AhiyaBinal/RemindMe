@@ -32,11 +32,20 @@ class DisplayDataList: UIViewController,UITableViewDelegate, UITableViewDataSour
         objcell.lblFriendName.text = objFriend[indexPath.row].name
         return objcell
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let flagStatus = objDBFunctions.deleteByEmailID(email: objFriend[indexPath.row].email)
+            if flagStatus {
+                objFriend = objDBFunctions.read()
+                tblFriendList.reloadData()
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         guard let objInputDataForm = self.storyboard?.instantiateViewController(withIdentifier: "InputDataForm") as? InputDataForm else { return }
         objInputDataForm.objFriend = objFriend
+        objInputDataForm.indexRank = indexPath.row
         self.navigationController?.pushViewController(objInputDataForm, animated: true)
     }
 }

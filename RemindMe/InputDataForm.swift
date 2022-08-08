@@ -28,17 +28,18 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
     var objFriend: [Friend] = []
     var strTry: String = ""
     var flagDOB: Bool = false
+    var indexRank :Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Details"
         if (objFriend.count > 0) {
-            txtFName.text = objFriend[0].name
-            txtFLastName.text = objFriend[0].surname
-            txtFRelation.text = objFriend[0].relation
-            txtFDOB.text = objFriend[0].DOB
-            txtFDOAnniversary.text = objFriend[0].DOA
-            txtFEmail.text = objFriend[0].email
-            txtFPhone.text = objFriend[0].phone
+            txtFName.text = objFriend[indexRank].name
+            txtFLastName.text = objFriend[indexRank].surname
+            txtFRelation.text = objFriend[indexRank].relation
+            txtFDOB.text = objFriend[indexRank].DOB
+            txtFDOAnniversary.text = objFriend[indexRank].DOA
+            txtFEmail.text = objFriend[indexRank].email
+            txtFPhone.text = objFriend[indexRank].phone
             txtFEmail.isUserInteractionEnabled = false
         }
         NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardDidShow(notification:)),
@@ -148,7 +149,7 @@ class InputDataForm: UIViewController,UITextFieldDelegate {
                 }
             }
             if !objCommonFunction.isValidEmail(email: emailString){
-                self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Please Enter Valid Email-id", txtField: txtFName, lblField: lblNameRequired)
+                self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Please Enter Valid Email-id", txtField: txtFEmail, lblField: lblEmailRequired)
             }
             if !objCommonFunction.isValidPhone(phone: phoneString){
                 self.setLabelTextFieldUI(flagStatus: false, borderWidth: 1.0, borderColor: UIColor.red.cgColor, strAlertMsg: "*Please Enter Valid Phone No.", txtField: txtFPhone, lblField: lblPhoneRequired)
