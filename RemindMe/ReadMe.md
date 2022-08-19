@@ -12,7 +12,9 @@ Steps to implement PageViewController , Json Parsing and Share Functionality
 DisplayDataList Controller
 Display list of your contacts by implementing UITableViewDelegate, UITableViewDataSource delegated methods which are numberOfRowsInSection, cellForRowAt, commitForRowAt, didSelectRowAt
 
+
 # InputDataForm
+    
     To store data of your contact here is a form which accepts data and store it to database using Sqlite,
      1.Here Email is a Primary field
      2.Here Name, Relation, DOB, Phone and Email are mandatory fields
