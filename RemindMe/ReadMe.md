@@ -24,8 +24,8 @@ Display list of your contacts by implementing UITableViewDelegate, UITableViewDa
 This file contains database functions like OpenDatabase, CreateTable, Insert, Update ,Delete, Read
 
 ![](image1.png)  
-![](../Images/image2.png)   
-![](/Images/image3.png)  
-![](/Images/image4.png)  
-![](/Images/image5.png)
-![][image_ref_a32ff4ads]
+![](image2.png)   
+![](image3.png)  
+![](image4.png)  
+![](image5.png)
+
