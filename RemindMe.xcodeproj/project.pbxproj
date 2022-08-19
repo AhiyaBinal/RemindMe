@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B12C486D28B02F0E004A442D /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = B12C486C28B02F0E004A442D /* ReadMe.md */; };
+		B12C487428B040EE004A442D /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = B12C486F28B040EE004A442D /* image2.png */; };
+		B12C487528B040EE004A442D /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = B12C487028B040EE004A442D /* image3.png */; };
+		B12C487628B040EE004A442D /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = B12C487128B040EE004A442D /* image1.png */; };
+		B12C487728B040EE004A442D /* image4.png in Resources */ = {isa = PBXBuildFile; fileRef = B12C487228B040EE004A442D /* image4.png */; };
+		B12C487828B040EE004A442D /* image5.png in Resources */ = {isa = PBXBuildFile; fileRef = B12C487328B040EE004A442D /* image5.png */; };
 		B141BBDD2889DF2C00EAB475 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B141BBDC2889DF2C00EAB475 /* AppDelegate.swift */; };
 		B141BBDF2889DF2C00EAB475 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B141BBDE2889DF2C00EAB475 /* SceneDelegate.swift */; };
 		B141BBE12889DF2C00EAB475 /* DisplayDataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B141BBE02889DF2C00EAB475 /* DisplayDataList.swift */; };
@@ -23,6 +28,11 @@
 
 /* Begin PBXFileReference section */
 		B12C486C28B02F0E004A442D /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		B12C486F28B040EE004A442D /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image2.png; path = ../../../../../Desktop/image2.png; sourceTree = "<group>"; };
+		B12C487028B040EE004A442D /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image3.png; path = ../../../../../Desktop/image3.png; sourceTree = "<group>"; };
+		B12C487128B040EE004A442D /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image1.png; path = ../../../../../Desktop/image1.png; sourceTree = "<group>"; };
+		B12C487228B040EE004A442D /* image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image4.png; path = ../../../../../Desktop/image4.png; sourceTree = "<group>"; };
+		B12C487328B040EE004A442D /* image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image5.png; path = ../../../../../Desktop/image5.png; sourceTree = "<group>"; };
 		B141BBD92889DF2C00EAB475 /* RemindMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemindMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B141BBDC2889DF2C00EAB475 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B141BBDE2889DF2C00EAB475 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +59,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B12C486E28B03FE9004A442D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B12C487128B040EE004A442D /* image1.png */,
+				B12C486F28B040EE004A442D /* image2.png */,
+				B12C487028B040EE004A442D /* image3.png */,
+				B12C487228B040EE004A442D /* image4.png */,
+				B12C487328B040EE004A442D /* image5.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		B141BBD02889DF2C00EAB475 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +90,7 @@
 		B141BBDB2889DF2C00EAB475 /* RemindMe */ = {
 			isa = PBXGroup;
 			children = (
+				B12C486E28B03FE9004A442D /* Images */,
 				B141BBDC2889DF2C00EAB475 /* AppDelegate.swift */,
 				B141BBDE2889DF2C00EAB475 /* SceneDelegate.swift */,
 				B141BBE02889DF2C00EAB475 /* DisplayDataList.swift */,
@@ -143,7 +166,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12C487628B040EE004A442D /* image1.png in Resources */,
 				B141BBE92889DF2E00EAB475 /* LaunchScreen.storyboard in Resources */,
+				B12C487528B040EE004A442D /* image3.png in Resources */,
+				B12C487428B040EE004A442D /* image2.png in Resources */,
+				B12C487728B040EE004A442D /* image4.png in Resources */,
+				B12C487828B040EE004A442D /* image5.png in Resources */,
 				B141BBE62889DF2E00EAB475 /* Assets.xcassets in Resources */,
 				B12C486D28B02F0E004A442D /* ReadMe.md in Resources */,
 				B141BBE42889DF2C00EAB475 /* Main.storyboard in Resources */,
