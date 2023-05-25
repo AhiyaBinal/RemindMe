@@ -58,7 +58,6 @@ final class TestUIApp: XCTestCase {
         let returnBtn = app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
         let submitBtn = app/*@START_MENU_TOKEN@*/.buttons["Submit"]/*[[".scrollViews.buttons[\"Submit\"]",".buttons[\"Submit\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         
-        let backBtn = app.navigationBars["Details"].buttons["List"]
         let addedCell = app.tables.staticTexts["Janak"]
         
         let collectionViewsQuery = app.datePickers.collectionViews
@@ -66,6 +65,7 @@ final class TestUIApp: XCTestCase {
 
         app.launch()
         
+        XCTAssertFalse(addedCell.exists)
         app.navigationBars["List"].buttons["add"].tap()
         nameField.tap()
         nameField.typeText("Janak")
@@ -91,11 +91,11 @@ final class TestUIApp: XCTestCase {
         emailField.typeText("janakmanek@gmail.com")
         returnBtn.tap()
         submitBtn.tap()
-        addedCell.tap()
-        backBtn.tap()
         
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Janak"]/*[[".cells.staticTexts[\"Janak\"]",".staticTexts[\"Janak\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.textFields["Surname"]/*[[".scrollViews.textFields[\"Surname\"]",".textFields[\"Surname\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCTAssertTrue(addedCell.exists)
+        addedCell.tap()
+        surnameField.tap()
+        surnameField.typeText("Rajubhai Manek")
         app/*@START_MENU_TOKEN@*/.buttons["Submit"]/*[[".scrollViews.buttons[\"Submit\"]",".buttons[\"Submit\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Submit"].tap()
 
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Janak"]/*[[".cells.staticTexts[\"Janak\"]",".staticTexts[\"Janak\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
